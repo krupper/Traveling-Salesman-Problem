@@ -1,27 +1,57 @@
 /**
  * @name Tour class
  * @description representing a tour between two Nodes
+ * @version 2
  */
 
-function Tour(node1, node2){
-  this.node1 = node1;
-  this.node2 = node2;
-  this.distance = 0;
+function Tour(){
+  this.distance = false;
+  this.nodes0 = nodeMap.nodes.slice(0); // make a copy of all nodes tp prevent an empty node array in nodeMap [clone array]
+  this.nodes = [];
+  this.drawTour = false;
 
-  this.estimateDistance = function(){
-    var distance = this.distance;
-    if(distance != 0){
-      var deltaX = Math.abs(this.node1.x - this.node2.x);
-      var deltaY = Math.abs(this.node1.y - this.node2.y);
+  this.findTour = function(){
+    var numberOfNodes = this.nodes0.length;
+    for (var i = 0; i < numberOfNodes; i++) {
+      var random = this.getRandomNumber(0, this.nodes0.length - 1);
+      this.nodes[i] = this.nodes0[random];
 
-      var distance = Math.round(Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)));
+      // remove array items
+      this.nodes0.splice(random, 1);
     }
 
-    return distance;
+    this.estimateDistance();
   };
 
-  this.print = function(){
+  this.estimateDistance = function(){
+    if(this.distance === false){
+      for (var i = 0; i < this.nodes.length -1; i++) {
+        var deltaX = this.nodes[i+1].x - this.nodes[i].x;
+        var deltaY = this.nodes[i+1].y - this.nodes[i].y;
 
+        this.distance += Math.round(Math.sqrt(deltaX * deltaX + deltaY * deltaY));
+
+        if(this.drawTour) {
+          var startX = this.nodes[i+1].x;
+          var stopX = this.nodes[i].x;
+          var startY = this.nodes[i+1].y;
+          var stopY = this.nodes[i].y;
+
+          nodeMap.canvas.beginPath();
+          nodeMap.canvas.moveTo(startX, startY);
+          nodeMap.canvas.lineTo(stopX, stopY);
+          nodeMap.canvas.stroke();
+        }
+
+      }
+    }
+
+    return this.distance;
+}
+
+  this.getRandomNumber = function(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   };
+
 
 }

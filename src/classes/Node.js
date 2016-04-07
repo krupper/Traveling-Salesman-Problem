@@ -33,7 +33,7 @@ function Node(canvas){
     this.canvas.fillStyle = this.color;
     this.canvas.fill();
 
-    this.name = name;
+    this.name = 'node: ' + name;
     this.canvas.font = '15pt Arial';
     this.canvas.fillStyle = '#000';
     this.canvas.textAlign = 'center';

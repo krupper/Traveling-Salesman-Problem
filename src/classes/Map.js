@@ -9,12 +9,15 @@ function Map(){
   this.amountOfNodes = 20;
   this.nodes = [];
 
-  this.generateNodes = function(){
+  this.generateNodes = function(callback){
     for (var i = 0; i < this.amountOfNodes; i++) {
       var node = new Node(this.canvas);
+
+      // set position and name
       node.setPosition(i);
-      this.nodes.push(node);
+      this.nodes[i] = node;
     }
+
   };
 
   this.isPositionOccupied = function(x, y){
