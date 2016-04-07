@@ -1,0 +1,38 @@
+/* apply a natural box layout model to all elements */
+html {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+*, *:before, *:after {
+  -moz-box-sizing: inherit; -webkit-box-sizing: inherit; box-sizing: inherit;
+}
+
+
+/* reset some common browser styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  }
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+pre {
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap:   break-word;
+}
+
+#container {
+  margin: 20px auto;
+  width: 800px;
+
+}
+
+#canvas {
+  border: solid 1px #ccc;
+}
