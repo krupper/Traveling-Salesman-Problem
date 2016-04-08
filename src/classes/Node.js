@@ -10,6 +10,7 @@ function Node(canvas){
   this.name = false;
   this.radius = 20;
   this.color = '#FF0000';
+  this.id = false;
 
   this.getRandomNumber = function(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -28,15 +29,19 @@ function Node(canvas){
       }
     }
 
+    this.name = 'node: ' + name;
+    this.id = name;
+  };
+
+  this.draw = function(){
     this.canvas.beginPath();
     this.canvas.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
     this.canvas.fillStyle = this.color;
     this.canvas.fill();
 
-    this.name = 'node: ' + name;
     this.canvas.font = '15pt Arial';
     this.canvas.fillStyle = '#000';
     this.canvas.textAlign = 'center';
-    this.canvas.fillText(name, this.x, this.y+7);
+    this.canvas.fillText(this.id, this.x, this.y+7);
   };
 }
